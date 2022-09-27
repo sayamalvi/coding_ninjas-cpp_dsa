@@ -26,7 +26,7 @@ public:
         if (nextIndex == capacity)
         {
 
-            int *newData = new T[2 * capacity];
+            T *newData = new T[2 * capacity];
             for (int i = 0; i < capacity; i++)
             {
                 newData[i] = data[i];
@@ -44,7 +44,7 @@ public:
         if (isEmpty())
         {
             cout << "Stack is empty";
-            return INT_MIN;
+            return 0;
         }
         nextIndex--;
         return data[nextIndex];
@@ -53,19 +53,19 @@ public:
     T top()
     {
         if (isEmpty())
-            return INT_MIN;
+            return 0;
         return data[nextIndex - 1];
     }
 };
 int main()
 {
-    TemplateStack<int> s;
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    s.push(40);
-    s.push(50);
-    s.push(60);
+    TemplateStack<char> s;
+    s.push(100);
+    s.push(101);
+    s.push(102);
+    s.push(103);
+    s.push(104);
+    s.push(105);
     cout << s.top() << endl;
 
     cout << s.pop() << endl;
