@@ -29,42 +29,18 @@ TreeNode<int> *takeInput()
     }
     return root;
 }
-void printTree(TreeNode<int> *root)
+void preOrder(TreeNode<int> *root)
 {
     if (root == NULL)
         return;
-    queue<TreeNode<int> *> printque;
-    printque.push(root);
-    while (!printque.empty())
-    {
-        TreeNode<int> *front = printque.front();
-        printque.pop();
-        cout << front->data << ":";
-        for (int i = 0; i < front->children.size(); i++)
-        {
-            cout << front->children[i]->data;
-            if (i != front->children.size() - 1)
-                cout << ",";
-            printque.push(front->children[i]);
-        }
-        cout << endl;
-    }
-}
-//--------------------------------------------
-int countNodes(TreeNode<int> *root)
-{
-    if (root == NULL)
-        return 0;
-    int ans = 1;
+    cout << root->data << " ";
     for (int i = 0; i < root->children.size(); i++)
     {
-        ans += countNodes(root->children[i]);
+        preOrder(root->children[i]);
     }
-    return ans + 1;
 }
-//--------------------------------------------
 int main()
 {
     TreeNode<int> *root = takeInput();
-    printTree(root);
+    preOrder(root);
 }
