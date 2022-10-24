@@ -2,21 +2,7 @@
 #include "BinaryTree.h"
 #include <queue>
 using namespace std;
-BinaryTree<int> *takeInput()
-{
-    int rootData;
-    cout << "Enter data" << endl;
-    cin >> rootData;
-    if (rootData == -1)
-        return NULL;
 
-    BinaryTree<int> *root = new BinaryTree<int>(rootData);
-    BinaryTree<int> *leftChild = takeInput();
-    BinaryTree<int> *rightChild = takeInput();
-    root->left = leftChild;
-    root->right = rightChild;
-    return root;
-}
 BinaryTree<int> *takeInputLevelWise()
 {
     int rootData;
@@ -53,23 +39,7 @@ BinaryTree<int> *takeInputLevelWise()
     }
     return root;
 }
-void printTree(BinaryTree<int> *root)
-{
-    if (root == NULL)
-        return;
-    cout << root->data << ":";
-    if (root->left != NULL)
-    {
-        cout << "L" << root->left->data;
-    }
-    if (root->right != NULL)
-    {
-        cout << "R" << root->right->data;
-    }
-    cout << endl;
-    printTree(root->left);
-    printTree(root->right);
-}
+
 void printLevelWise(BinaryTree<int> *root)
 {
     if (root == NULL)
@@ -101,10 +71,16 @@ void printLevelWise(BinaryTree<int> *root)
         cout << endl;
     }
 }
+int countNodes(BinaryTree<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    return countNodes(root->left) + countNodes(root->right) + 1;
+}
 int main()
 {
-    BinaryTree<int> *root = takeInput();
-    printTree(root);
+    BinaryTree<int> *root = takeInputLevelWise();
     printLevelWise(root);
+    cout << countNodes(root);
     delete root;
 }
