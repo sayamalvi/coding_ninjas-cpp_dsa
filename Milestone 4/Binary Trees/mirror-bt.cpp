@@ -1,8 +1,10 @@
+#include <climits>
+#include <cmath>
 #include <iostream>
-#include "BinaryTree.h"
 #include <queue>
+#include "BinaryTree.h"
+#include <cmath>
 using namespace std;
-
 BinaryTree<int> *takeInputLevelWise()
 {
     int rootData;
@@ -40,51 +42,35 @@ BinaryTree<int> *takeInputLevelWise()
     return root;
 }
 
-void printLevelWise(BinaryTree<int> *root)
+void printLevel(BinaryTree<int> *root)
 {
-    if (root == NULL)
-        return;
-    queue<BinaryTree<int> *> print;
-    print.push(root);
-    while (!print.empty())
+    queue<BinaryTree<int> *> q;
+    q.push(root);
+    q.push(NULL);
+    while (!q.empty())
     {
-        BinaryTree<int> *front = print.front();
-        print.pop();
-        cout << front->data << ":";
-        if (front->left != NULL)
+        BinaryTree<int> *first = q.front();
+        q.pop();
+        if (first == NULL)
         {
-            print.push(front->left);
-            cout << "L:" << front->left->data << ",";
+            if (q.empty())
+            {
+                break;
+            }
+            cout << endl;
+            q.push(NULL);
+            continue;
         }
-        else
-            cout << "L:"
-                 << "-1"
-                 << ",";
-        if (front->right != NULL)
+        cout << first->data << " ";
+        if (first->left != NULL)
         {
-            print.push(front->right);
-            cout << "R:" << front->right->data;
+            q.push(first->left);
         }
-        else
-            cout << "R:"
-                 << "-1";
-        cout << endl;
+        if (first->right != NULL)
+        {
+            q.push(first->right);
+        }
     }
-}
-//--------------------------------------------
-
-int height(BinaryTree<int> *root)
-{
-    if (root == NULL)
-        return 0;
-    int heightRight = 1;
-    int heightLeft = 1;
-    heightRight += height(root->right);
-    heightLeft += height(root->left);
-    if (heightRight > heightLeft)
-        return heightRight;
-    else
-        return heightLeft;
 }
 int height(BinaryTree<int> *root)
 {
@@ -92,10 +78,21 @@ int height(BinaryTree<int> *root)
         return 0;
     return max(height(root->left), height(root->right)) + 1;
 }
-//--------------------------------------------
+//---------------------------------------------
+void mirrorBinaryTree(BinaryTree<int> *root)
+{
+    if (root == NULL)
+        return;
+    mirrorBinaryTree(root->right);
+    mirrorBinaryTree(root->left);
+    BinaryTree<int> *temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+}
+//---------------------------------------------
 int main()
 {
     BinaryTree<int> *root = takeInputLevelWise();
-    cout << height(root);
-    delete root;
+    mirrorBinaryTree(root);
+    printLevel(root);
 }
