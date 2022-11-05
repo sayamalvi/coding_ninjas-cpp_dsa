@@ -16,14 +16,14 @@ public:
 };
 
 template <typename T>
-class BinaryTreeNode
+class BinaryTree
 {
 public:
     T data;
-    BinaryTreeNode<T> *left;
-    BinaryTreeNode<T> *right;
+    BinaryTree<T> *left;
+    BinaryTree<T> *right;
 
-    BinaryTreeNode(T data)
+    BinaryTree(T data)
     {
         this->data = data;
         left = NULL;
@@ -33,7 +33,7 @@ public:
 
 using namespace std;
 
-BinaryTreeNode<int> *takeInput()
+BinaryTree<int> *takeInput()
 {
     int rootData;
 
@@ -42,19 +42,19 @@ BinaryTreeNode<int> *takeInput()
     {
         return NULL;
     }
-    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
-    queue<BinaryTreeNode<int> *> q;
+    BinaryTree<int> *root = new BinaryTree<int>(rootData);
+    queue<BinaryTree<int> *> q;
     q.push(root);
     while (!q.empty())
     {
-        BinaryTreeNode<int> *currentNode = q.front();
+        BinaryTree<int> *currentNode = q.front();
         q.pop();
         int leftChild, rightChild;
 
         cin >> leftChild;
         if (leftChild != -1)
         {
-            BinaryTreeNode<int> *leftNode = new BinaryTreeNode<int>(leftChild);
+            BinaryTree<int> *leftNode = new BinaryTree<int>(leftChild);
             currentNode->left = leftNode;
             q.push(leftNode);
         }
@@ -62,8 +62,8 @@ BinaryTreeNode<int> *takeInput()
         cin >> rightChild;
         if (rightChild != -1)
         {
-            BinaryTreeNode<int> *rightNode =
-                new BinaryTreeNode<int>(rightChild);
+            BinaryTree<int> *rightNode =
+                new BinaryTree<int>(rightChild);
             currentNode->right = rightNode;
             q.push(rightNode);
         }
@@ -82,7 +82,7 @@ void print(Node<int> *head)
     cout << endl;
 }
 //------------------------------------------------------
-vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
+vector<Node<int> *> constructLinkedListForEachLevel(BinaryTree<int> *root)
 {
     vector<Node<int> *> output;
 
@@ -94,7 +94,7 @@ vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
     }
 
     // make a queue and push root and Null
-    queue<BinaryTreeNode<int> *> q;
+    queue<BinaryTree<int> *> q;
     q.push(root);
     q.push(NULL);
 
@@ -106,7 +106,7 @@ vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
     while (!q.empty())
     {
         // store the first element of queue and remove it from queue
-        BinaryTreeNode<int> *current = q.front();
+        BinaryTree<int> *current = q.front();
         q.pop();
 
         // if first element is not null then make a new node and push its children in the queue
@@ -149,7 +149,7 @@ vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
 //------------------------------------------------------
 int main()
 {
-    BinaryTreeNode<int> *root = takeInput();
+    BinaryTree<int> *root = takeInput();
     vector<Node<int> *> ans = constructLinkedListForEachLevel(root);
 
     for (int i = 0; i < ans.size(); i++)
