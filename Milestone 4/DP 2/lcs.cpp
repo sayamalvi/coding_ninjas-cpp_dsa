@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// Brute force - Recursion
 int lcsRecursive(string s, string t)
 {
     if (s.size() == 0 || t.size() == 0)
@@ -18,6 +19,7 @@ int lcsRecursive(string s, string t)
     }
 }
 
+// Memoization
 int lcsMemo(string s, string t, int **output)
 {
     int m = s.size();
@@ -60,6 +62,8 @@ int lcsMemo(string s, string t)
     }
     return lcsMemo(s, t, output);
 }
+
+// DP
 int lcsDP(string s, string t)
 {
     int m = s.size();
@@ -81,7 +85,7 @@ int lcsDP(string s, string t)
     {
         for (int j = 1; j <= m; j++)
         {
-            if (s[m-i] == t[n-j])
+            if (s[m - i] == t[n - j])
             {
                 output[i][j] = 1 + output[i - 1][j - 1];
             }
