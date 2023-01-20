@@ -72,5 +72,7 @@ int main()
     int weights[] = {5, 1, 8, 9, 2};
     int values[] = {4, 10, 2, 3, 1};
     int w = 15;
-    cout << knapsackRecursive(weights, values, 5, w);
+    cout << knapsackRecursive(weights, values, 5, w) << endl;
+    cout << knapsackMemo(weights, values, 5, w) << endl;
+    cout << knapsackDP(weights, values, 5, w) << endl;
 }

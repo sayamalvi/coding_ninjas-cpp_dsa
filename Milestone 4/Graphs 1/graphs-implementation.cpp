@@ -13,7 +13,7 @@ void printDFS(int **edges, int n, int sv, bool *visited)
             if (visited[i])
                 continue;
             printDFS(edges, n, i, visited);
-        }
+        } 
     }
 }
 void printBFS(int **edges, int n, int sv, bool *visited)
@@ -74,6 +74,7 @@ void BFS(int **edges, int n)
 }
 int main()
 {
+    // implementation with adjancy matrix
     int n;
     int e;
     cin >> n >> e;
