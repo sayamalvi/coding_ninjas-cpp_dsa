@@ -4,20 +4,24 @@ using namespace std;
 // BFS traversal
 void printBFS(int **edges, int n, int sv)
 {
+    // first come first serve
     queue<int> seenVertices;
     bool *visited = new bool[n];
     for (int i = 0; i < n; i++)
         visited[i] = false;
+    // push starting vertex into queue and mark it as visited
     seenVertices.push(sv);
     visited[sv] = true;
     while (!seenVertices.empty())
     {
+        // store first element and pop it, then print it.
         int currentVertex = seenVertices.front();
         seenVertices.pop();
         cout << currentVertex << " ";
+        // check who has edges with the currentVertex
         for (int i = 0; i < n; i++)
         {
-            if (i == sv)
+            if (i == currentVertex)
                 continue;
             if (edges[currentVertex][i] == 1 && !visited[i])
             {
