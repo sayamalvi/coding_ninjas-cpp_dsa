@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// BFS
 bool hasPathBFS(int n, int **edges, int sv, int v1, int v2)
 {
     bool visited[n] = {false};
@@ -27,8 +28,8 @@ bool hasPathBFS(int n, int **edges, int sv, int v1, int v2)
     else
         return false;
 }
-
-bool checkPathDFS(int n, int **edges, int sv, int v1, int v2, bool *visited)
+// DFS
+bool hasPathDFS(int n, int **edges, int sv, int v1, int v2, bool *visited)
 {
     if (visited[v1] && visited[v2])
         return true;
@@ -41,7 +42,7 @@ bool checkPathDFS(int n, int **edges, int sv, int v1, int v2, bool *visited)
         if (!visited[i] && edges[sv][i] == 1)
         {
             visited[i] = true;
-            res = checkPathDFS(n, edges, i, v1, v2, visited);
+            res = hasPathDFS(n, edges, i, v1, v2, visited);
             if (res)
                 return true;
         }
